@@ -23,6 +23,28 @@
 				$scope.users = $scope.users.concat(promise);
 			};
 		});
+
+		var removeUser = function (user_id) {
+			var promise = $http.delete(url+'/'+user_id).
+				then(function(response) {
+					return response.data;
+				}, function(response) {
+					return {"status": false}
+				});
+			
+			return promise;
+		}
+
+		$scope.deleteUser = function (user, users_list) {
+			removeUser(user.id).then(function (promise) {
+				if (!promise.status) {
+					var index = users_list.indexOf(user);
+					if (index != -1) {
+						users_list.splice(index,1);
+					};
+				};
+			})
+		}
 	});
 
 	app.controller('UserFormController', function ($scope, $http) {
