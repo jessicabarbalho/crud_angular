@@ -1,0 +1,42 @@
+<!DOCTYPE hml>
+<html ng-app="user">
+    <head>
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/app.css">
+    </head>
+    <body layout="column">
+        <div class="lit-group" ng-controller="UsersController">
+            <li class="list-group-item" ng-repeat="user in users">
+                <div>
+                    <h3>{{ user.name }}</h3>
+                </div>
+            </li>
+
+            <form name="userForm" ng-controller="UserFormController" ng-submit="userForm.$valid && addUser(users)" novalidates>
+                <fieldset class="form-group">
+                    <label>Name: </label>
+                    <input type="name" class="form-control" placeholder="Maria Barros" title="Name" ng-model="user.name" required>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label>E-mail: </label>
+                    <input type="email" class="form-control" placeholder="dea@mail.com" title="E-mail" ng-model="user.email" required>
+                </fieldset>
+                <fieldset class="form-group">
+                    <label>Birth date: </label>
+                    <input type="birth" class="form-control" placeholder="10/10/2000" title="Birth" ng-model="user.birth_day">
+                </fieldset>
+                <fieldset class="form-group">
+                    <label>Gender: </label>
+                    <select class="form-control" title="gender" ng-model="user.gender">
+                        <option value="MALE"> Male </option>
+                        <option value="FEMALE"> Female </option>
+                    </select>
+                </fieldset>
+                <input type="submit" value="Create">
+            </form> 
+        </div>
+
+        <script type="text/javascript" src="js/angular.min.js"></script>
+        <script type="text/javascript" src="js/app.js"></script>
+    </body>
+</html>
