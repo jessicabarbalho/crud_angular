@@ -39,18 +39,13 @@
 			return promise;
 		}
 
-		$scope.addUser = function (users) {
+		$scope.addUser = function (users_list) {
 			createUser($scope.user).then(function (promise) {
 				if (!promise.status) {
-					users = users.concat(promise);
+					users_list.push(promise);
 					$scope.user = {}; // reset the form
 				};
 			});
 		};
-	});
-
-	app.config(function($httpProvider) {
-		$httpProvider.defaults.useXDomain = true;
-		delete $httpProvider.defaults.headers.common['X-Requested-With'];
 	});
 })();
