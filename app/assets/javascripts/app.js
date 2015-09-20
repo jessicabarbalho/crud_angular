@@ -1,13 +1,13 @@
 (function () {
-	var app = angular.module('user', ['ngRoute'])
+	var app = angular.module('user', ['ngRoute', 'templates'])
 
 	app.config(function ($routeProvider) {
 		$routeProvider.when('/user/:userId', { 
-			templateUrl: 'user.html',
+			templateUrl: 'assets/user.html',
 			controller: 'UserController'
 		})
-		.when('/index',
-			{templateUrl: 'user-list.html',
+		.when('/',
+			{templateUrl: 'assets/user-list.html',
 			controller: 'UsersController'}
 		).
 		otherwise({
@@ -85,7 +85,50 @@
 		};
 	});
 
-	app.controller('UserController', function ($scope, $routeParams) {
+	app.controller('UserController', function ($scope, $routeParams, $http) {
 		$scope.user_id = $routeParams.userId;
+
+		$scope.user = {};
+		
+		var getUser = function () {
+			var promise = $http.get(url+"/"+$scope.user_id).
+				then(function(response) {
+					return response.data;
+				}, function(response) {
+					return {"status": false}
+				});
+			
+			return promise;
+		}
+
+		getUser().then(function (promise) {
+			if (!promise.status) {
+				$scope.user = promise;
+			};
+		});
+	});
+
+	app.controller('UserUpdateController', function ($scope, $http) {
+		$scope.user = {};
+
+		var createUser = function (user) {
+			var promise = $http.post(url, user).
+				then(function(response) {
+					return response.data;
+				}, function(response) {
+					return {"status": false}
+				});
+			
+			return promise;
+		}
+
+		$scope.updateUser = function (users_list) {
+			createUser($scope.user).then(function (promise) {
+				if (!promise.status) {
+					users_list.push(promise);
+					$scope.user = {}; // reset the form
+				};
+			});
+		};
 	});
 })();

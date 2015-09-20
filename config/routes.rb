@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  resources :users, except: [:new, :edit]
+	root 'index#index'
+
+	resources :users, except: [:new, :edit]
 end

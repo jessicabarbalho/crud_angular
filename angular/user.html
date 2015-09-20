@@ -1,0 +1,46 @@
+<h3>User Details</h3>
+<div>
+    <dl class="dl-horizontal">
+        <dt>Name: </dt>
+        <dd>{{ user.name }}</dd>
+    </dl>
+    <dl class="dl-horizontal">
+        <dt>E-mail: </dt>
+        <dd>{{ user.email }}</dd>
+    </dl>
+    <dl class="dl-horizontal" ng-show=user.birth_day>
+        <dt>Birth date: </dt>
+        <dd>{{ user.birth_day }}</dd>
+    </dl>
+    <dl class="dl-horizontal" ng-show=user.gender>
+        <dt>Gender: </dt>
+        <dd>{{ user.gender }}</dd>
+    </dl>
+</div>
+
+<h3>New user</h3>
+
+<div>
+    <form name="userForm " ng-controller="UserFormController" ng-submit="userForm.$valid && addUser(users)" novalidates>
+        <fieldset class="form-group col-md-6">
+            <label>Name: </label>
+            <input type="name" class="form-control" placeholder="Maria Barros" title="Name" ng-model="user.name" required>
+        </fieldset>
+        <fieldset class="form-group col-md-6">
+            <label>E-mail: </label>
+            <input type="email" class="form-control" placeholder="dea@mail.com" title="E-mail" ng-model="user.email" required>
+        </fieldset>
+        <fieldset class="form-group col-md-6">
+            <label>Birth date: </label>
+            <input type="birth" class="form-control" placeholder="10/10/2000" title="Birth" ng-model="user.birth_day">
+        </fieldset>
+        <fieldset class="form-group col-md-4">
+            <label>Gender: </label>
+            <select class="form-control" title="gender" ng-model="user.gender">
+                <option value="Male"> Male </option>
+                <option value="Female"> Female </option>
+            </select>
+        </fieldset>
+        <button class="btn btn-primary btn-lg" type="submit">Create</button>
+    </form> 
+</div>

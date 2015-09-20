@@ -9,6 +9,7 @@ gem 'mail_validation'
 gem 'roar-rails', '~> 1.0.1'
 gem 'multi_json', '~> 1.11.2'
 gem 'rack-cors', :require => 'rack/cors'
+gem 'angular-rails-templates'
 
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
