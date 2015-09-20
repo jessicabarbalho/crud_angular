@@ -2,7 +2,7 @@
     <h3>User list</h3>
 
     <li class="list-group-item" ng-repeat="user in users">
-        <a ng-href="#/user/{{user.id}}" class=""> {{ user.name }} </a>
+        <a ng-href="#/user/{{user.id}}"> {{ user.name }} </a>
         <button type="button" class="close" aria-label="Close" ng-click="deleteUser(user, users)"><span aria-hidden="true">&times;</span></button>
     </li>
 </div>

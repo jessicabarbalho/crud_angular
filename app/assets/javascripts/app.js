@@ -108,11 +108,9 @@
 		});
 	});
 
-	app.controller('UserUpdateController', function ($scope, $http) {
-		$scope.user = {};
-
-		var createUser = function (user) {
-			var promise = $http.post(url, user).
+	app.controller('UserUpdateController', function ($scope, $http, $route) {
+		var attUser = function (user) {
+			var promise = $http.put(url+"/"+user.id, user).
 				then(function(response) {
 					return response.data;
 				}, function(response) {
@@ -122,11 +120,10 @@
 			return promise;
 		}
 
-		$scope.updateUser = function (users_list) {
-			createUser($scope.user).then(function (promise) {
+		$scope.updateUser = function (user) {
+			attUser(user).then(function (promise) {
 				if (!promise.status) {
-					users_list.push(promise);
-					$scope.user = {}; // reset the form
+					$route.reload();
 				};
 			});
 		};
